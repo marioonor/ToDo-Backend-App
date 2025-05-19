@@ -35,19 +35,20 @@ public class TodoappApplication implements CommandLineRunner {
 		while (running) {
 
 			System.out.println("\nPlease select activity you want to perform:");
-			System.out.println("1. Show");
-			System.out.println("2. Add");
-			System.out.println("3. Edit");
-			System.out.println("4. Delete");
-			System.out.println("5. Exit");
+			System.out.println(">> View");
+			System.out.println(">> Add");
+			System.out.println(">> Edit");
+			System.out.println(">> Delete");
+			System.out.println(">> Exit");
 
-			System.out.println("\nPlease enter your choice:");
+			System.out.println("\nPlease enter your choice(must be lowercase):");
 			String choice = scanner.nextLine();
 
 			switch (choice) {
-				case "Show":
+				case "view":
 					System.out.println("\n\nHere are your todo items:\n");
 					for (TodoEntity todoEntities : todoRepository.findAll()) {
+						System.out.println("Id: " + todoEntities.getId()); 
 						System.out.println("Title: " + todoEntities.getTitle());
 						System.out.println("Description: " + todoEntities.getDescription());
 						System.out.println("Status: " + todoEntities.getStatus());
@@ -56,7 +57,7 @@ public class TodoappApplication implements CommandLineRunner {
 					}
 					break;
 
-				case "Add":
+				case "add":
 					System.out.println("\nPlease enter the number of todo items you want to add:");
 					int numberOfItems = scanner.nextInt();
 					scanner.nextLine();
@@ -78,7 +79,7 @@ public class TodoappApplication implements CommandLineRunner {
 					System.out.println("\n\nYour todo items have been saved successfully!\n\n");
 					break;
 
-				case "Edit":
+				case "edit":
 					System.out.println("\nYou have selected to Edit a todo item.");
 					System.out.println("\nPlease enter the \"Title\" of todo item you want to edit:");
 					String editTitle = scanner.nextLine();
@@ -98,7 +99,7 @@ public class TodoappApplication implements CommandLineRunner {
 					System.out.println("\n\nYour todo item has been updated successfully!\n\n");
 					break;
 
-				case "Delete":
+				case "delete":
 					System.out.println("\nYou have selected to Delete a todo item.");
 					System.out.println("\nPlease enter the \"ID\" of todo item you want to delete:");
 					Long deleteId = scanner.nextLong();
@@ -112,12 +113,13 @@ public class TodoappApplication implements CommandLineRunner {
 					System.out.println("\n\nYour todo item has been deleted successfully!\n\n");
 					break;
 
-				case "Exit":
+				case "exit":
 					System.out.println("\n\n\nThank you for using the Todo Application!");
 					System.out.println("Goodbye, " + name + "!");
 					System.out.println("Have a great day!");
 					running = false;
-					return;
+					System.exit(0);
+					break;
 
 				default:
 					System.out.println("\nInvalid choice. Please try again.");
